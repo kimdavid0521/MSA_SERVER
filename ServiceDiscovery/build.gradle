@@ -40,7 +40,9 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.mockito:mockito-core:5.1.1'
 }
 
 // Spring Boot의 버전에 따라 Spring Cloud BOM을 추가 ( 스프링 3버전이라 2022.0.4 버전을 적용하였습니다. )
@@ -52,4 +54,9 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// java agent 경고 메세지 없애기
+test {
+	jvmArgs '-Djdk.instrument.traceUsage=true'
 }
